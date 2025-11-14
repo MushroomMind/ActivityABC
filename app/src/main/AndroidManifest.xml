@@ -20,7 +20,9 @@
         <activity
             android:name=".ActivityA"
             android:exported="true"
-            android:launchMode="singleInstance" >
+            android:launchMode="singleInstance"
+            android:showWhenLocked="true"
+            android:turnScreenOn="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

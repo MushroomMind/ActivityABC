@@ -3,6 +3,7 @@ package com.example.activityabc
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -23,6 +24,11 @@ class ActivityB : AppCompatActivity() {
             insets
         }
 
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_SECURE,
+            WindowManager.LayoutParams.FLAG_SECURE
+        )
+
         val buttonB2C = findViewById<Button>(R.id.button_b_2_c)
 
         buttonB2C.setOnClickListener {
@@ -34,10 +40,10 @@ class ActivityB : AppCompatActivity() {
 
         val backgroundB = findViewById<View>(R.id.main)
 
-        val ColorB = intent.getStringExtra("background")
-        if (ColorB != null) {
-            backgroundB.setBackgroundColor(ColorB.toColorInt())
-            text.setText(ColorB, BufferType.EDITABLE)
+        val colorB = intent.getStringExtra("background")
+        if (colorB != null) {
+            backgroundB.setBackgroundColor(colorB.toColorInt())
+            text.setText(colorB, BufferType.EDITABLE)
         }
     }
 }

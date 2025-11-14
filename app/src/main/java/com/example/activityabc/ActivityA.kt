@@ -2,7 +2,6 @@ package com.example.activityabc
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -13,6 +12,8 @@ import android.widget.TextView.BufferType
 import androidx.core.graphics.toColorInt
 import kotlin.random.Random
 import android.util.Log
+import android.view.WindowManager
+import android.widget.Toast
 
 class ActivityA : AppCompatActivity() {
     private var activityBColor: String = "green"
@@ -28,24 +29,32 @@ class ActivityA : AppCompatActivity() {
             insets
         }
 
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_SECURE,
+            WindowManager.LayoutParams.FLAG_SECURE
+        )
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+
         val editText = findViewById<EditText>(R.id.edit_color)
 
         val buttonGenColor = findViewById<Button>(R.id.gen_new_color)
 
         buttonGenColor.setOnClickListener {
-            val rawColor: String = Random.nextInt(0xFFFFFF).toString(16)
-            val randColor = '#' + "0".repeat(6 - rawColor.length) + rawColor
+            val randColor = String.format("#%06X", 0xFFFFFF and Random.nextInt(0xFFFFFF))
             editText.setText(randColor, BufferType.EDITABLE)
         }
+
+        val toast = Toast.makeText(this, "Invalid color input", Toast.LENGTH_SHORT)
 
         val buttonApplyColor = findViewById<Button>(R.id.apply_color)
 
         buttonApplyColor.setOnClickListener {
             val unchecked = editText.text.toString()
-            if (unchecked.matches(Regex("#[a-f0-9]{6}"))) {
+            if (unchecked.matches(Regex("#[a-fA-F0-9]{6}"))) {
                 activityBColor = unchecked
                 buttonApplyColor.setBackgroundColor(activityBColor.toColorInt())
-            }
+            } else
+                toast.show()
         }
 
         if (savedColor != null) {
