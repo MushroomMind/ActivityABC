@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">ActivityABC</string>
+    <string name="jump_a_2_b">Open ActivityB</string>
+    <string name="jump_b_2_c">Open ActivityC</string>
+    <string name="jump_c_2_a">Open ActivityA</string>
+    <string name="default_text">Enter Color</string>
+    <string name="default_hint">Enter the color in HexColor(#123ABC) format</string>
+    <string name="color_gen_button">Generate Color</string>
+    <string name="color_apply_button">Apply Color</string>
 </resources>
